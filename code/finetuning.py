@@ -22,14 +22,14 @@ def Config():
     # Required parameters
     parser.add_argument(
         "--dataset_path",
-        default=None,
+        default="/home/amable/Desktop/shared/0002/data",
         type=str,
-        required=True,
+        required=False,
         help="Path to the labeled dataset.",
     )
     parser.add_argument(
         "--pretrain_path",
-        default=None,
+        default="../checkpoints/pretrain",
         type=str,
         required=False,
         help="The storage path of the pre-trained model parameters.",

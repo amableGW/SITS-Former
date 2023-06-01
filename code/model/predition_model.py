@@ -1,3 +1,4 @@
+import datetime
 import torch.nn as nn
 from .bert import BERT
 
@@ -19,6 +20,7 @@ class BERTPrediction(nn.Module):
         super().__init__()
         self.bert = bert
         self.linear = nn.Linear(self.bert.hidden, num_features)
+        self.name = f"BERTPrediction_{datetime.datetime.now().strftime('%Y-%m-%d_%H%M%S')}"
 
     def forward(self, x, doy, mask):
         x = self.bert(x, doy, mask)

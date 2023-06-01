@@ -12,14 +12,14 @@ class BERTEmbedding(nn.Module):
         sum of both features are output of BERTEmbedding
     """
 
-    def __init__(self, num_features, dropout=0.1):
+    def __init__(self, days_range, dropout=0.1):
         """
         :param num_features: number of input features
         :param dropout: dropout rate
         """
         super().__init__()
         channel_size = (32, 64, 256)
-        kernel_size = (5, 3, 5, 3)
+        kernel_size = (5, 1, 5, 1)
 
         self.conv1 = nn.Sequential(
             nn.Conv3d(in_channels=1,
@@ -37,11 +37,11 @@ class BERTEmbedding(nn.Module):
             nn.BatchNorm3d(channel_size[1]),
         )
 
-        self.linear = nn.Linear(in_features=channel_size[1]*2,
+        self.linear = nn.Linear(in_features=channel_size[1],
                                 out_features=channel_size[2])
 
         self.embed_size = channel_size[-1]
-        self.position = PositionalEncoding(d_model=self.embed_size, max_len=366)
+        self.position = PositionalEncoding(d_model=self.embed_size, max_len=days_range)
         self.dropout = nn.Dropout(p=dropout)
 
     def forward(self, input_sequence, doy_sequence):

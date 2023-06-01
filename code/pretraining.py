@@ -19,10 +19,10 @@ def Config():
     # Required parameters
     parser.add_argument(
         "--dataset_path",
-        default=None,
+        default="/home/amable/Desktop/shared/0002/data",
         type=str,
-        required=True,
-        help="Path to the unlabeled dataset.",
+        required=False,
+        help="Path to the labeled dataset.",
     )
     parser.add_argument(
         "--pretrain_path",
