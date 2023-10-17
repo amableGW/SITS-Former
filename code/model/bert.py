@@ -8,7 +8,7 @@ from .embedding import BERTEmbedding
 
 class BERT(nn.Module):
 
-    def __init__(self, days_range, hidden, n_layers, attn_heads, dropout=0.1):
+    def __init__(self, days_range, hidden, n_layers, attn_heads, num_bands=9, dropout=0.1):
         """
         :param num_features: number of input features
         :param hidden: hidden size of the SITS-Former model
@@ -24,7 +24,7 @@ class BERT(nn.Module):
 
         feed_forward_hidden = hidden * 4
 
-        self.embedding = BERTEmbedding(days_range)
+        self.embedding = BERTEmbedding(num_bands, days_range)
 
         encoder_layer = TransformerEncoderLayer(hidden, attn_heads, feed_forward_hidden, dropout)
         encoder_norm = LayerNorm(hidden)

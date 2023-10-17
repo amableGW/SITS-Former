@@ -12,14 +12,14 @@ class BERTEmbedding(nn.Module):
         sum of both features are output of BERTEmbedding
     """
 
-    def __init__(self, days_range, dropout=0.1):
+    def __init__(self, num_bands, days_range, dropout=0.1):
         """
         :param num_features: number of input features
         :param dropout: dropout rate
         """
         super().__init__()
         channel_size = (32, 64, 256)
-        kernel_size = (5, 1, 5, 1)
+        kernel_size = (5, 1, num_bands - 4, 1)
 
         self.conv1 = nn.Sequential(
             nn.Conv3d(in_channels=1,
